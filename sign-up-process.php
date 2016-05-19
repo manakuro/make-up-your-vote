@@ -8,10 +8,10 @@
     else {
         
         function prevent($this, $conn) {
-		stripslashes($this);
-		mysqli_real_escape_string($conn, $this);
-		return $this;
-	}
+        stripslashes($this);
+        mysqli_real_escape_string($conn, $this);
+        return $this;
+    }
         
         //if user hits the submit button
         if(isset($_POST['submit'])){
@@ -64,7 +64,9 @@
                             VALUES ('$email','$hashed')";
                 //insert into database
                 $insertResult = mysqli_query($connection,$insert);
-                
+                //begin session for user once sign up is complete
+                session_start();
+                $_SESSION['user'] = $email;
                 //Once user has succesfully created an account
                 // send to the compare page to begin voting
                 header("Location: compare.php");
